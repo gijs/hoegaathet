@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<title>Hoegaathet</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Persoonlijk contactendagboek voor iPhone. Houd bij hoe het gaat met de mensen die je dierbaar zijn.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:      #F5F4F0;
+  --surface: #FFFFFF;
+  --text:    #1B2733;
+  --muted:   #6B7D8E;
+  --accent:  #2C5F8A;
+  --tint:    #EAF1F8;
+  --border:  #DDDBD5;
+  --phone:   #0F1720;
+  --ff-d: 'Fraunces', Georgia, serif;
+  --ff-b: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg:      #0F1720;
+  --surface: #182030;
+  --text:    #E8EDF4;
+  --muted:   #8599AD;
+  --accent:  #5B8EC8;
+  --tint:    #182840;
+  --border:  #253346;
+  --phone:   #080E16;
+}}
+:root[data-theme="dark"] {
+  --bg:      #0F1720;
+  --surface: #182030;
+  --text:    #E8EDF4;
+  --muted:   #8599AD;
+  --accent:  #5B8EC8;
+  --tint:    #182840;
+  --border:  #253346;
+  --phone:   #080E16;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--ff-b); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 32px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.nav-name { font-family: var(--ff-d); font-style: italic; font-size: 22px; font-weight: 600; color: var(--text); text-decoration: none; }
+.badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--text); color: var(--bg);
+  border-radius: 10px; padding: 9px 16px;
+  font-size: 13px; font-weight: 600;
+  text-decoration: none; transition: opacity .15s;
+}
+.badge:hover { opacity: .75; }
+.badge svg { fill: currentColor; flex-shrink: 0; }
+
+.hero { text-align: center; padding: 56px 24px 40px; max-width: 700px; margin: 0 auto; }
+.app-icon { width: 104px; height: 104px; border-radius: 24px; margin: 0 auto 28px; box-shadow: 0 8px 40px rgba(0,0,0,.18); }
+.hero h1 { font-family: var(--ff-d); font-style: italic; font-weight: 400; font-size: clamp(52px, 9vw, 84px); line-height: 1.0; letter-spacing: -.02em; color: var(--text); text-wrap: balance; margin-bottom: 18px; }
+.hero p { font-size: clamp(17px, 2.5vw, 20px); color: var(--muted); line-height: 1.55; max-width: 480px; margin: 0 auto 32px; text-wrap: balance; }
+.hero .badge { font-size: 15px; padding: 12px 22px; }
+
+.screenshots { padding: 64px 0 48px; }
+.screenshots-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; }
+.scroll-row { display: flex; gap: 16px; overflow-x: auto; padding: 8px 40px 24px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.scroll-row::-webkit-scrollbar { display: none; }
+.phone { flex-shrink: 0; width: 198px; background: var(--phone); border-radius: 40px; padding: 10px 8px; scroll-snap-align: center; box-shadow: 0 20px 56px rgba(0,0,0,.28); border: 1px solid rgba(255,255,255,.06); }
+.phone img { width: 100%; border-radius: 32px; display: block; }
+
+.features { max-width: 960px; margin: 0 auto; padding: 56px 32px 80px; }
+.features h2 { font-family: var(--ff-d); font-style: italic; font-size: clamp(32px, 5vw, 46px); font-weight: 400; color: var(--text); text-align: center; text-wrap: balance; margin-bottom: 48px; }
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+.feature-card { background: var(--surface); border-radius: 16px; padding: 28px 24px; border: 1px solid var(--border); }
+.feature-icon { font-size: 28px; margin-bottom: 14px; line-height: 1; }
+.feature-card h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+.feature-card p { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+.support { background: var(--surface); border-top: 1px solid var(--border); padding: 64px 32px; }
+.support-inner { max-width: 720px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+@media (max-width: 540px) { .support-inner { grid-template-columns: 1fr; } }
+.support-block h3 { font-size: 14px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+.support-block p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+.support-block a { color: var(--accent); text-decoration: none; }
+.support-block a:hover { text-decoration: underline; }
+
+footer { text-align: center; padding: 24px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-name">Hoegaathet</a>
+  <a href="#" class="badge">
+    <svg width="18" height="18" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+    App Store
+  </a>
+</nav>
+
+<section class="hero">
+  <img class="app-icon" src="icon.png" alt="Hoegaathet app icon">
+  <h1>Hoe gaat het?</h1>
+  <p>Hoegaathet helpt je bijhouden hoe het gaat met de mensen die je dierbaar zijn — vrienden, familie en kennissen.</p>
+  <a href="#" class="badge">
+    <svg width="20" height="20" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+    Download in de App Store
+  </a>
+</section>
+
+<section class="screenshots">
+  <p class="screenshots-label">App schermen</p>
+  <div class="scroll-row">
+    <div class="phone"><img src="screenshots/screen1.png" alt="Screenshot 1"></div>
+    <div class="phone"><img src="screenshots/screen2.png" alt="Screenshot 2"></div>
+    <div class="phone"><img src="screenshots/screen3.png" alt="Screenshot 3"></div>
+    <div class="phone"><img src="screenshots/screen4.png" alt="Screenshot 4"></div>
+    <div class="phone"><img src="screenshots/screen5.png" alt="Screenshot 5"></div>
+    <div class="phone"><img src="screenshots/screen6.png" alt="Screenshot 6"></div>
+    <div class="phone"><img src="screenshots/screen7.png" alt="Screenshot 7"></div>
+  </div>
+</section>
+
+<section class="features">
+  <h2>Alles op één plek</h2>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📓</div>
+      <h3>Logboek</h3>
+      <p>Schrijf aantekeningen over gesprekken en momenten. Dicteer ze in het Nederlands met je stem.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🗓</div>
+      <h3>Tijdlijn</h3>
+      <p>Verjaardagen, trouwdagen en herdenkingen overzichtelijk bij elkaar — nooit meer vergeten.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✦</div>
+      <h3>AI-briefing</h3>
+      <p>Elke dag een feitelijke samenvatting van wat er speelt, per groep en per persoon.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <h3>Volledig privé</h3>
+      <p>Alle gegevens blijven op je telefoon. Geen account, geen cloud, geen advertenties.</p>
+    </div>
+  </div>
+</section>
+
+<section class="support" id="support">
+  <div class="support-inner">
+    <div class="support-block">
+      <h3>Contact</h3>
+      <p>Vragen, suggesties of een bug gevonden? Stuur een mail naar <a href="mailto:gijs.nijholt@gmail.com">gijs.nijholt@gmail.com</a> — ik reageer zo snel mogelijk.</p>
+    </div>
+    <div class="support-block">
+      <h3>Privacy</h3>
+      <p>Hoegaathet verzamelt geen gegevens. Alles wat je invoert blijft op jouw iPhone en wordt nooit gedeeld met derden.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Gijs Nijholt &nbsp;·&nbsp; Hoegaathet
+</footer>
+
+</body>
+</html>
